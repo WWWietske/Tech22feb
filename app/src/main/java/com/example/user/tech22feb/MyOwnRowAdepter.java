@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 /**
  * Als je op een symbool klikt dan geeft ie een toast met de naam.
  */
-public class MyOwnRowAdepter {
+public class MyOwnRowAdepter extends ArrayAdapter<String>{
 
     Context context1;
     int[] pictures1;
@@ -39,15 +40,16 @@ public class MyOwnRowAdepter {
         ImageView imageview = (ImageView) view.findViewById(R.id.shapeImageView);
         TextView textview = (TextView) view.findViewById(R.id.nameTextView);
 
-        String name = names1(position);
-        int picture = pictures1(position);
+        final String name = names1[position];
+        int picture = pictures1[position];
 
         textview.setText(name);
         imageview.setImageResource(picture);
 
         View.OnClickListener listener1 = new View. OnClickListener(){
-            public void OnClick(View view){
-                String text = "You clicked on" + name;
+            @Override
+            public void onClick(View v) {
+                String text = "You clicked on " + name;
                 // toast is klein grijs berichtje
                 Toast toast = Toast.makeText(context1, text, Toast.LENGTH_SHORT);
                 toast.show();
